@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        .navbar {
+            overflow: hidden;
+            background-color: #222;
+            display: flex;
+            justify-content: center;
+        }
+        .navbar a {
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        .navbar a:hover {
+            background-color: #444;
+        }
+        .navbar .active {
+            background-color: #4CAF50;
+        }
+        form {
+            max-width: 400px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        input[type="text"],
+        input[type="submit"] {
+            width: calc(100% - 20px);
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+            transition: box-shadow 0.3s ease;
+        }
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        .error-message {
+            background-color: #ffcccc;
+            padding: 10px;
+            border: 1px solid #ff0000;
+            text-align: center;
+            max-width: 400px;
+            margin: 20px auto;
+            border-radius: 6px;
+            color: #ff0000;
+        }
+        h1{  text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="navbar">
+    <a href="/" th:class="${currentPage == '/'} ? 'active'">Home</a>
+    <a href="/add" th:class="${currentPage == 'add'} ? 'active'">Add Employee</a>
+    <a href="/update" th:class="${currentPage == 'update'} ? 'active'">Update Employee</a>
+    <a href="/delete" th:class="${currentPage == 'delete'} ? 'active'">Delete Employee</a>
+    <a href="/duoEmployee" th:class="${currentPage == 'duoEmployee'} ? 'active'">Duo Employees</a>
+</div>
+<div th:if="${hasError}" class="error-message">
+    <p>Bad input! Please try again.</p>
+</div>
+<h1>Delete employee</h1>
+<form th:action="@{/deleted}" method="post" th:object="${deletedEmployee}">
+    Employee ID: <input type="text" th:field="*{emplId}" /><br/>
+    <input type="submit" value="Delete Employee" />
+</form>
+</body>
+</html>

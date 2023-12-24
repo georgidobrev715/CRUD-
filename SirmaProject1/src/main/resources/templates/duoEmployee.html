@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0
+            padding: 20px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin: 20px auto;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 12px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 40px;
+            color: #333;
+        }
+
+        .navbar {
+            overflow: hidden;
+            background-color: #222;
+            display: flex;
+            justify-content: center;
+        }
+        .navbar a {
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        .navbar a:hover {
+            background-color: #444;
+        }
+        .navbar .active {
+            background-color: #4CAF50;
+        }
+    </style>
+</head>
+<body>
+<div class="navbar">
+  <a href="/" th:class="${currentPage == 'home'} ? 'active'">Home</a>
+  <a href="/add" th:class="${currentPage == 'add'} ? 'active'">Add Employee</a>
+  <a href="/update" th:class="${currentPage == 'updated'} ? 'active'">Update Employee</a>
+  <a href="/delete" th:class="${currentPage == 'deleted'} ? 'active'">Delete Employee</a>
+  <a href="/duoEmployee" th:class="${currentPage == 'duoEmployee'} ? 'active'">Duo Employees</a>
+</div>
+<!-- Conditionally display the table based on the value of 'days' -->
+<h1 th:if="${days > 0}" th:text="'Employees working on the same project:'" style="text-align: center;"></h1>
+<table th:if="${days > 0}">
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Project ID</th>
+    <th>Start Date</th>
+    <th>End Date</th>
+  </tr>
+  </thead>
+  <tbody>
+  <!-- Only display table rows when 'days' is greater than 0 -->
+  <tr th:each="employee : ${employees}">
+    <td th:text="${employee.getEmplId}"></td>
+    <td th:text="${employee.getProjectId}"></td>
+    <td th:text="${employee.getStartDate}"></td>
+    <td th:text="${employee.getEndDate}"></td>
+  </tr>
+  </tbody>
+</table>
+
+<!-- Display a message when there are no employees working on the same project -->
+<h1 th:if="${days <= 0}" th:text="'Huh empty? Seems like no one is working'" style="text-align: center;"></h1>
+
+<!-- Optionally, display the number of days if 'days' is greater than 0 -->
+<h1 th:if="${days > 0}" th:text="'They have been working on the same project for ' + ${days} + ' days'" style="text-align: center;"></h1>
+</body>
+</html>

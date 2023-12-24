@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Employee List</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+
+    .navbar {
+            overflow: hidden;
+            background-color: #222;
+            display: flex;
+            justify-content: center;
+        }
+        .navbar a {
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        .navbar a:hover {
+            background-color: #444;
+        }
+        .navbar .active {
+            background-color: #4CAF50;
+        }
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #333;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 80%;
+      margin: 0 auto;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    th, td {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 12px;
+    }
+
+    th {
+      background-color: #f2f2f2;
+      font-weight: bold;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    tr:hover {
+      background-color: #e9e9e9;
+    }
+  </style>
+</head>
+<body>
+<div class="navbar">
+  <a href="/" th:class="${currentPage == 'home'} ? 'active'">Home</a>
+  <a href="/add" th:class="${currentPage == 'add'} ? 'active'">Add Employee</a>
+  <a href="/update" th:class="${currentPage == 'updated'} ? 'active'">Update Employee</a>
+  <a href="/delete" th:class="${currentPage == 'deleted'} ? 'active'">Delete Employee</a>
+  <a href="/duoEmployee" th:class="${currentPage == 'duoEmployee'} ? 'active'">Duo Employees</a>
+</div>
+<h1>Employee List</h1>
+<table>
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Project ID</th>
+    <th>Start Date</th>
+    <th>End Date</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="employee : ${employees}">
+    <td th:text="${employee.getEmplId}"></td>
+    <td th:text="${employee.getProjectId}"></td>
+    <td th:text="${employee.getStartDate}"></td>
+    <td th:text="${employee.getEndDate}"></td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>
