@@ -1,6 +1,6 @@
-# SirmaProject
+# CRUD POJECT
 
-The SirmaProject is a Spring Boot and Thymeleaf-based application offering functionalities for CRUD operations, employee collaboration analysis, and CSV database integration.
+This project is a Spring Boot and Thymeleaf-based application offering functionalities for CRUD operations, employee collaboration analysis, and CSV database integration.
 
 ## Features
 
